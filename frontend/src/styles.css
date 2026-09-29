@@ -1,0 +1,36 @@
+body {
+  background: var(--bs-tertiary-bg);
+}
+
+.table-sortable th.sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.table-sortable th.sortable:hover {
+  background: var(--bs-secondary-bg);
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+.details-table th {
+  width: 40%;
+  font-weight: 500;
+  color: var(--bs-secondary-color);
+}
+
+.ref-card > .card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ref-card .ref-card {
+  background: var(--bs-tertiary-bg);
+}

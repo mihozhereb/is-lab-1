@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.2"
+             xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd">
+    <persistence-unit name="islab" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>java:jboss/datasources/IsLabDS</jta-data-source>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <validation-mode>CALLBACK</validation-mode>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="jakarta.persistence.validation.group.pre-update"
+                      value="jakarta.validation.groups.Default,ru.mihozhereb.domain.Persisted"/>
+            <property name="hibernate.default_batch_fetch_size" value="50"/>
+            <property name="hibernate.show_sql" value="false"/>
+        </properties>
+    </persistence-unit>
+</persistence>

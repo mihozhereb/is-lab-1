@@ -1,0 +1,35 @@
+# Локальный запуск: ./gradlew war && docker compose up --build
+# Приложение: http://localhost:8080/islab/
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: studs
+      POSTGRES_USER: islab
+      POSTGRES_PASSWORD: islab
+    ports:
+      - "15432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U islab -d studs"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/studs
+      DB_USER: islab
+      DB_PASSWORD: islab
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
